@@ -1,0 +1,17 @@
+---
+import type { CardProps } from '../../types/index';
+
+interface Props extends CardProps {}
+
+const { variant = 'default', class: className = '' } = Astro.props;
+
+const variantClasses: Record<string, string> = {
+  default: 'bg-white border border-neutral-200 shadow-soft',
+  glass: 'bg-surface-glass backdrop-blur-xl border border-neutral-200/50',
+  elevated: 'bg-white border border-neutral-200 shadow-lg animate-card-hover',
+};
+---
+
+<div class:list={['rounded-2xl p-6', variantClasses[variant], className]}>
+  <slot />
+</div>

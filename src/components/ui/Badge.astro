@@ -1,0 +1,17 @@
+---
+import type { BadgeProps } from '../../types/index';
+
+interface Props extends BadgeProps {}
+
+const { variant = 'primary', class: className = '' } = Astro.props;
+
+const variantClasses: Record<string, string> = {
+  primary: 'bg-primary-100 text-primary-700',
+  secondary: 'bg-secondary-100 text-secondary-700',
+  accent: 'bg-accent-100 text-accent-700',
+};
+---
+
+<span class:list={['inline-block rounded-full px-3 py-1 text-xs font-semibold', variantClasses[variant], className]}>
+  <slot />
+</span>
