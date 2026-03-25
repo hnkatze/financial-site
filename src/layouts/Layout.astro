@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  url: string;
+  type?: 'website' | 'article';
+  jsonLd?: object | null;
+}
+
+const {
+  title,
+  description,
+  image = '/images/og-default.jpg',
+  url,
+  type = 'website',
+  jsonLd = null,
+} = Astro.props;
+
+const siteUrl = 'https://www.example.com';
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+---
+
+<!doctype html>
+<html lang="es" class="bg-neutral-50">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- SEO Meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content="es_HN" />
+    <meta property="og:site_name" content="FinanzaPro" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImageUrl} />
+
+    <!-- Fonts: Satoshi (body) + Clash Display (headings) loaded via @font-face in global.css -->
+
+    <!-- JSON-LD Structured Data -->
+    {jsonLd && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+
+  </head>
+  <body class="bg-neutral-50 text-neutral-900 font-sans antialiased">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
