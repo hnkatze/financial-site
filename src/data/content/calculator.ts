@@ -65,6 +65,8 @@ export const calculatorContent = {
     termOptionSuffix: 'meses',
     termOptionYearsSuffix: 'años',
     resultsSection: 'Resultados',
+    startDateLabel: 'Fecha de inicio',
+    endDateLabel: 'Fecha de finalización',
     monthlyPayment: 'Cuota mensual',
     totalPayment: 'Total a pagar',
     totalInterest: 'Total intereses',

@@ -1,10 +1,20 @@
 import type { LoanInput, LoanResult, AmortizationEntry } from '../types/index';
 
+/** Format a Date as "MMM YYYY" in Spanish (e.g., "Abr 2026") */
+export function formatMonthYear(date: Date): string {
+  return date.toLocaleDateString('es-HN', { month: 'short', year: 'numeric' });
+}
+
+/** Format a Date as "DD/MM/YYYY" */
+export function formatDate(date: Date): string {
+  return date.toLocaleDateString('es-HN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
 /**
  * Standard amortization formula: M = P * [r(1+r)^n] / [(1+r)^n - 1]
  * Handles zero interest as a special case (simple division).
  */
-export function calculateLoan(input: LoanInput): LoanResult {
+export function calculateLoan(input: LoanInput, startDate: Date = new Date()): LoanResult {
   const { amount, annualRate, termMonths } = input;
 
   if (amount <= 0 || termMonths <= 0) {
@@ -12,6 +22,8 @@ export function calculateLoan(input: LoanInput): LoanResult {
       monthlyPayment: 0,
       totalPayment: 0,
       totalInterest: 0,
+      startDate: formatDate(startDate),
+      endDate: formatDate(startDate),
       schedule: [],
     };
   }
@@ -19,12 +31,17 @@ export function calculateLoan(input: LoanInput): LoanResult {
   const monthlyPayment = calculateMonthlyPayment(input);
   const totalPayment = monthlyPayment * termMonths;
   const totalInterest = totalPayment - amount;
-  const schedule = calculateAmortizationSchedule(input);
+  const schedule = calculateAmortizationSchedule(input, startDate);
+
+  const endDateObj = new Date(startDate);
+  endDateObj.setMonth(endDateObj.getMonth() + termMonths);
 
   return {
     monthlyPayment,
     totalPayment,
     totalInterest,
+    startDate: formatDate(startDate),
+    endDate: formatDate(endDateObj),
     schedule,
   };
 }
@@ -43,7 +60,7 @@ export function calculateMonthlyPayment(input: LoanInput): number {
   return (amount * monthlyRate * factor) / (factor - 1);
 }
 
-export function calculateAmortizationSchedule(input: LoanInput): AmortizationEntry[] {
+export function calculateAmortizationSchedule(input: LoanInput, startDate: Date = new Date()): AmortizationEntry[] {
   const { amount, annualRate, termMonths } = input;
 
   if (amount <= 0 || termMonths <= 0) return [];
@@ -54,6 +71,9 @@ export function calculateAmortizationSchedule(input: LoanInput): AmortizationEnt
   let balance = amount;
 
   for (let month = 1; month <= termMonths; month++) {
+    const paymentDate = new Date(startDate);
+    paymentDate.setMonth(paymentDate.getMonth() + month);
+
     const interestPortion = balance * monthlyRate;
     const principalPortion = monthlyPayment - interestPortion;
 
@@ -62,6 +82,7 @@ export function calculateAmortizationSchedule(input: LoanInput): AmortizationEnt
 
     schedule.push({
       month,
+      date: formatMonthYear(paymentDate),
       payment: Math.round(monthlyPayment * 100) / 100,
       principal: Math.round(principalPortion * 100) / 100,
       interest: Math.round(interestPortion * 100) / 100,

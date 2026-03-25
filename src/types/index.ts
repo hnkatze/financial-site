@@ -98,11 +98,14 @@ export interface LoanResult {
   monthlyPayment: number;
   totalPayment: number;
   totalInterest: number;
+  startDate: string;
+  endDate: string;
   schedule: AmortizationEntry[];
 }
 
 export interface AmortizationEntry {
   month: number;
+  date: string;
   payment: number;
   principal: number;
   interest: number;

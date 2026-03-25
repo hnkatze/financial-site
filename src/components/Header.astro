@@ -67,7 +67,7 @@ const currentPath = Astro.url.pathname;
 
     <!-- Mobile Menu Panel -->
     <div class="fixed inset-x-0 top-16 bottom-0 z-40 translate-x-full bg-white/95 backdrop-blur-xl transition-transform duration-300 ease-in-out peer-checked:translate-x-0 lg:hidden border-t border-neutral-200/50">
-      <nav class="flex flex-col p-6 gap-2" aria-label={headerContent.mobileNavAriaLabel}>
+      <nav class="flex flex-col p-6 gap-2 bg-white/95 backdrop-blur-xl" aria-label={headerContent.mobileNavAriaLabel}>
         {navigation.map((item) => {
           const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
           return (
