@@ -2,18 +2,18 @@
 import Container from '../ui/Container.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 import Card from '../ui/Card.astro';
-import type { Testimonial } from '../../types/index';
-import testimonialsData from '../../data/testimonials.json';
+import { testimonials } from '../../data/testimonials';
+import { homeContent } from '../../data/content/home';
 
-const testimonials = testimonialsData as Testimonial[];
+const { testimonials: testimonialsContent } = homeContent;
 ---
 
 <section class="py-20 lg:py-28 bg-neutral-50">
   <Container>
     <SectionHeading
-      title="Lo que dicen nuestros clientes"
-      subtitle="La confianza de nuestros clientes es nuestro mayor activo. Conoce sus experiencias con FinanzaPro."
-      badge="Testimonios"
+      title={testimonialsContent.title}
+      subtitle={testimonialsContent.subtitle}
+      badge={testimonialsContent.badge}
     />
 
     <ul class="stagger-fade-in-up grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3" role="list">
@@ -21,7 +21,7 @@ const testimonials = testimonialsData as Testimonial[];
         <li class="animate-fade-in-up">
           <Card variant="elevated" class="h-full flex flex-col">
             {/* Star rating */}
-            <div class="mb-4 flex gap-1" aria-label={`Calificacion: ${testimonial.rating} de 5 estrellas`}>
+            <div class="mb-4 flex gap-1" aria-label={testimonialsContent.ratingLabel.replace('{rating}', String(testimonial.rating))}>
               {Array.from({ length: 5 }, (_, i) => (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

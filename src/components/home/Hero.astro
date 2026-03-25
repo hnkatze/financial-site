@@ -1,6 +1,9 @@
 ---
 import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
+import { homeContent } from '../../data/content/home';
+
+const { hero } = homeContent;
 ---
 
 <section class="relative overflow-hidden animate-hue-shift py-24 sm:py-32 lg:py-40">
@@ -23,21 +26,21 @@ import Button from '../ui/Button.astro';
   <Container class="relative z-10">
     <div class="animate-fade-in-up text-center">
       <span class="mb-6 inline-block rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium text-primary-100 backdrop-blur-sm">
-        Soluciones financieras desde 2008
+        {hero.badge}
       </span>
       <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl font-heading leading-tight">
-        Tu futuro financiero<br class="hidden sm:block" />
-        <span class="animate-text-shimmer">comienza aqui</span>
+        {hero.title}<br class="hidden sm:block" />
+        <span class="animate-text-shimmer">{hero.titleAccent}</span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg text-primary-100/90 sm:text-xl">
-        Soluciones financieras integrales disenadas para impulsar tus metas personales y empresariales con confianza, transparencia y el respaldo de mas de 15 anos de experiencia.
+        {hero.subtitle}
       </p>
       <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <Button href="/services" size="lg" class="bg-white! text-primary-700! hover:bg-neutral-100! shadow-lg animate-btn-shimmer animate-pulse-glow">
-          Nuestros Servicios
+        <Button href={hero.primaryCta.href} size="lg" class="bg-white! text-primary-950! font-bold! hover:bg-neutral-100! shadow-lg animate-btn-shimmer animate-pulse-glow">
+          {hero.primaryCta.text}
         </Button>
-        <Button href="/calculator" variant="outline" size="lg" class="border-white/80! text-white! hover:bg-white/10!">
-          Calculadora de Prestamos
+        <Button href={hero.secondaryCta.href} variant="outline" size="lg" class="border-white/80! text-white! hover:bg-white/10!">
+          {hero.secondaryCta.text}
         </Button>
       </div>
     </div>
