@@ -1,0 +1,98 @@
+export const aboutContent = {
+  hero: {
+    badge: 'Conócenos',
+    title: 'Sobre FinanzaPro',
+    subtitle: 'Más de 15 años construyendo confianza, innovando y transformando vidas a través de soluciones financieras integrales en Honduras.',
+  },
+  mission: {
+    badge: 'Misión',
+    title: 'Nuestra Misión',
+    subtitle: 'Democratizar el acceso a servicios financieros de calidad en Honduras, brindando soluciones accesibles, transparentes y personalizadas que impulsen el bienestar económico de familias y empresas.',
+    paragraphs: [
+      'Desde nuestra fundación, hemos creído que cada hondureño merece acceso a herramientas financieras que le permitan construir un futuro más sólido. No somos solo una empresa de servicios financieros — somos un aliado comprometido con tu crecimiento.',
+      'Trabajamos cada día para simplificar lo complejo, para que puedas tomar decisiones financieras con confianza y claridad.',
+    ],
+    visionTitle: 'Nuestra Visión',
+    visionText: 'Ser la empresa líder en soluciones financieras innovadoras en Centroamérica, reconocida por la excelencia en el servicio, la tecnología de vanguardia y el impacto positivo en las comunidades que servimos. Aspiramos a que cada hondureño tenga las herramientas para alcanzar su máximo potencial económico.',
+  },
+  values: {
+    badge: 'Valores',
+    title: 'Nuestros Valores',
+    subtitle: 'Los principios que guían cada decisión y definen nuestra identidad como empresa.',
+    items: [
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>`,
+        title: 'Integridad',
+        description: 'Actuamos con honestidad y ética en cada decisión. Nuestros clientes confían en nosotros porque cumplimos lo que prometemos.',
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>`,
+        title: 'Transparencia',
+        description: 'Sin letras pequeñas ni costos ocultos. Comunicamos de forma clara y abierta todas las condiciones de nuestros servicios.',
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" /></svg>`,
+        title: 'Compromiso',
+        description: 'Nos dedicamos al éxito financiero de cada cliente. Tu bienestar económico es nuestra prioridad y motivación diaria.',
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" /></svg>`,
+        title: 'Innovación',
+        description: 'Adoptamos tecnología de punta para ofrecer soluciones financieras modernas, ágiles y accesibles desde cualquier lugar.',
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" /></svg>`,
+        title: 'Servicio al Cliente',
+        description: 'Cada persona que nos contacta recibe atención personalizada y calidez humana. No somos un número, somos tu aliado financiero.',
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A8.966 8.966 0 0 1 3 12c0-1.264.26-2.467.732-3.558" /></svg>`,
+        title: 'Responsabilidad Social',
+        description: 'Contribuimos al desarrollo de Honduras a través de programas de educación financiera y apoyo a comunidades vulnerables.',
+      },
+    ],
+  },
+  team: {
+    badge: 'Equipo Directivo',
+    title: 'Nuestro Equipo',
+    subtitle: 'Profesionales comprometidos con tu éxito financiero, con décadas de experiencia combinada en el sector.',
+    linkedinAriaLabel: 'LinkedIn de {name}',
+  },
+  timeline: {
+    badge: 'Trayectoria',
+    title: 'Nuestra Historia',
+    subtitle: 'Más de 15 años construyendo confianza y resultados para nuestros clientes.',
+    milestones: [
+      {
+        year: '2008',
+        title: 'Fundación de FinanzaPro',
+        description: 'Iniciamos operaciones en Tegucigalpa con una visión clara: democratizar el acceso a servicios financieros de calidad en Honduras.',
+      },
+      {
+        year: '2012',
+        title: 'Expansión Regional',
+        description: 'Abrimos nuestras primeras sucursales en San Pedro Sula y La Ceiba, llevando nuestros servicios a más hondureños.',
+      },
+      {
+        year: '2016',
+        title: 'Transformación Digital',
+        description: 'Lanzamos nuestra plataforma en línea, permitiendo a nuestros clientes gestionar sus finanzas desde cualquier dispositivo.',
+      },
+      {
+        year: '2019',
+        title: 'Certificación Internacional',
+        description: 'Obtuvimos certificaciones de calidad ISO 9001 y reconocimiento como una de las empresas financieras más innovadoras de Centroamérica.',
+      },
+      {
+        year: '2022',
+        title: '15,000 Clientes Activos',
+        description: 'Alcanzamos un hito histórico con más de 15,000 clientes activos y L. 2,500 millones en préstamos otorgados.',
+      },
+      {
+        year: '2025',
+        title: 'Innovación Continua',
+        description: 'Implementamos tecnología fintech de última generación y ampliamos nuestra oferta con nuevos productos de inversión y seguros.',
+      },
+    ],
+  },
+} as const;
