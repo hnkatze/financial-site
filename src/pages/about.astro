@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import Mission from '../components/about/Mission.astro';
+import Values from '../components/about/Values.astro';
+import Team from '../components/about/Team.astro';
+import Timeline from '../components/about/Timeline.astro';
+import { generateOrganizationJsonLd, generateBreadcrumbJsonLd } from '../lib/seo';
+import siteData from '../data/site.json';
+
+const organizationJsonLd = generateOrganizationJsonLd(siteData);
+const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+  { name: 'Inicio', url: 'https://www.example.com/' },
+  { name: 'Nosotros', url: 'https://www.example.com/about' },
+]);
+
+const jsonLd = [organizationJsonLd, breadcrumbJsonLd];
+---
+
+<Layout
+  title="Nosotros — FinanzaPro | Confianza y Experiencia Financiera"
+  description="Conoce la historia, misión, valores y el equipo detrás de FinanzaPro. Más de 15 años impulsando el crecimiento financiero de Honduras."
+  url="https://www.example.com/about"
+  jsonLd={jsonLd}
+>
+  {/* Page hero */}
+  <section class="relative overflow-hidden bg-gradient-to-br from-secondary-800 via-secondary-900 to-primary-900 py-20 sm:py-24 lg:py-32">
+    <!-- Decorative elements -->
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+      <svg class="absolute -top-16 -right-16 h-72 w-72 opacity-10 animate-float" viewBox="0 0 288 288" fill="none">
+        <circle cx="144" cy="144" r="144" fill="white" />
+      </svg>
+      <svg class="absolute -bottom-12 -left-12 h-56 w-56 opacity-10" viewBox="0 0 224 224" fill="none">
+        <circle cx="112" cy="112" r="112" fill="white" />
+      </svg>
+    </div>
+
+    <Container class="relative z-10 text-center">
+      <div class="animate-fade-in-up">
+        <span class="mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium text-secondary-100 backdrop-blur-sm">
+          Conócenos
+        </span>
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-heading">
+          Sobre FinanzaPro
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-secondary-200/90">
+          Más de 15 años construyendo confianza, innovando y transformando vidas a través de soluciones financieras integrales en Honduras.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <Mission />
+  <Values />
+  <Team />
+  <Timeline />
+</Layout>

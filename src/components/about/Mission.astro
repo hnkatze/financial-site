@@ -1,0 +1,66 @@
+---
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+---
+
+<section class="py-20 lg:py-28 bg-neutral-50">
+  <Container>
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+      <!-- Text content -->
+      <div class="animate-fade-in-up">
+        <SectionHeading
+          title="Nuestra Misión"
+          subtitle="Democratizar el acceso a servicios financieros de calidad en Honduras, brindando soluciones accesibles, transparentes y personalizadas que impulsen el bienestar económico de familias y empresas."
+          badge="Misión"
+          align="left"
+        />
+        <div class="space-y-4 text-neutral-600 leading-relaxed">
+          <p>
+            Desde nuestra fundación, hemos creído que cada hondureño merece acceso a herramientas financieras que le permitan construir un futuro más sólido. No somos solo una empresa de servicios financieros — somos un aliado comprometido con tu crecimiento.
+          </p>
+          <p>
+            Trabajamos cada día para simplificar lo complejo, para que puedas tomar decisiones financieras con confianza y claridad.
+          </p>
+        </div>
+      </div>
+
+      <!-- Decorative visual element -->
+      <div class="relative animate-fade-in-up" aria-hidden="true">
+        <div class="relative aspect-square max-w-md mx-auto">
+          <!-- Gradient background circle -->
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-100 to-primary-200"></div>
+          <!-- Floating decorative shapes -->
+          <svg class="absolute inset-0 h-full w-full p-12 animate-float" viewBox="0 0 200 200" fill="none">
+            <circle cx="100" cy="80" r="50" class="fill-primary-500/20" />
+            <rect x="40" y="100" width="120" height="60" rx="12" class="fill-secondary-500/15" />
+            <path d="M60 90 L100 50 L140 90" stroke-width="3" class="stroke-primary-600" fill="none" stroke-linecap="round" />
+            <circle cx="100" cy="130" r="20" class="fill-accent-500/20" />
+          </svg>
+          <!-- Corner accent -->
+          <div class="absolute -top-3 -right-3 size-20 rounded-2xl bg-accent-400/30 blur-sm"></div>
+          <div class="absolute -bottom-3 -left-3 size-16 rounded-2xl bg-primary-400/30 blur-sm"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vision highlight -->
+    <div class="mt-16 animate-fade-in-up">
+      <div class="rounded-2xl bg-gradient-to-r from-primary-50 to-secondary-50 border border-primary-100 p-8 lg:p-12">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
+          <div class="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-primary-600 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-2">Nuestra Visión</h3>
+            <p class="text-neutral-600 leading-relaxed">
+              Ser la empresa líder en soluciones financieras innovadoras en Centroamérica, reconocida por la excelencia en el servicio, la tecnología de vanguardia y el impacto positivo en las comunidades que servimos. Aspiramos a que cada hondureño tenga las herramientas para alcanzar su máximo potencial económico.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
