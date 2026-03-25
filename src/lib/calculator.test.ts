@@ -4,6 +4,8 @@ import {
   calculateMonthlyPayment,
   calculateAmortizationSchedule,
   formatCurrency,
+  formatMonthYear,
+  formatDate,
 } from './calculator';
 
 describe('calculateMonthlyPayment', () => {
@@ -87,6 +89,19 @@ describe('calculateLoan', () => {
     expect(result.totalInterest).toBeCloseTo(result.totalPayment - 100_000, 2);
     expect(result.totalInterest).toBeGreaterThan(0);
     expect(result.schedule).toHaveLength(12);
+  });
+
+  it('includes start and end dates', () => {
+    const start = new Date(2026, 0, 15); // Jan 15, 2026
+    const result = calculateLoan(
+      { amount: 100_000, annualRate: 12, termMonths: 24 },
+      start,
+    );
+
+    expect(result.startDate).toBeTruthy();
+    expect(result.endDate).toBeTruthy();
+    // End date should be 24 months after start
+    expect(result.endDate).toContain('2028');
   });
 
   it('total interest is 0 when rate is 0%', () => {
@@ -199,10 +214,42 @@ describe('calculateAmortizationSchedule', () => {
     });
   });
 
+  it('each entry has a date string', () => {
+    const start = new Date(2026, 2, 1); // Mar 1, 2026
+    const schedule = calculateAmortizationSchedule(
+      { amount: 50_000, annualRate: 10, termMonths: 6 },
+      start,
+    );
+
+    for (const entry of schedule) {
+      expect(entry.date).toBeTruthy();
+      expect(typeof entry.date).toBe('string');
+    }
+    // First payment is 1 month after start
+    expect(schedule[0].date).toContain('2026');
+  });
+
   it('returns empty array for invalid input', () => {
     expect(calculateAmortizationSchedule({ amount: 0, annualRate: 12, termMonths: 12 })).toEqual([]);
     expect(calculateAmortizationSchedule({ amount: 100_000, annualRate: 12, termMonths: 0 })).toEqual([]);
     expect(calculateAmortizationSchedule({ amount: -1, annualRate: 12, termMonths: 12 })).toEqual([]);
+  });
+});
+
+describe('formatMonthYear', () => {
+  it('formats date as month and year', () => {
+    const date = new Date(2026, 5, 15); // June 2026
+    const result = formatMonthYear(date);
+    expect(result).toContain('2026');
+  });
+});
+
+describe('formatDate', () => {
+  it('formats date with day, month, and year', () => {
+    const date = new Date(2026, 0, 15); // Jan 15, 2026
+    const result = formatDate(date);
+    expect(result).toContain('2026');
+    expect(result).toContain('15');
   });
 });
 

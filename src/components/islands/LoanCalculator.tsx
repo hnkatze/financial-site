@@ -160,6 +160,18 @@ export default function LoanCalculator() {
                   </p>
                 </div>
 
+                {/* Dates */}
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <p class="text-sm font-medium text-primary-200/80 mb-1">{L.startDateLabel}</p>
+                    <p class="text-base font-semibold">{result.startDate}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-primary-200/80 mb-1">{L.endDateLabel}</p>
+                    <p class="text-base font-semibold">{result.endDate}</p>
+                  </div>
+                </div>
+
                 {/* Secondary metrics */}
                 <div class="grid grid-cols-2 gap-4 mb-8">
                   <div>
@@ -227,7 +239,7 @@ export default function LoanCalculator() {
               <table class="w-full min-w-[500px] text-sm">
                 <thead class="sticky top-0 bg-neutral-100">
                   <tr>
-                    <th class="px-3 py-2 text-left font-semibold text-neutral-700">{L.tableMonth}</th>
+                    <th class="px-3 py-2 text-left font-semibold text-neutral-700">{L.tableDate}</th>
                     <th class="px-3 py-2 text-right font-semibold text-neutral-700">{L.tablePayment}</th>
                     <th class="px-3 py-2 text-right font-semibold text-neutral-700">{L.tablePrincipal}</th>
                     <th class="px-3 py-2 text-right font-semibold text-neutral-700">{L.tableInterest}</th>
@@ -240,7 +252,7 @@ export default function LoanCalculator() {
                       key={row.month}
                       class="border-t border-neutral-100 even:bg-neutral-50"
                     >
-                      <td class="px-3 py-2 text-neutral-600">{row.month}</td>
+                      <td class="px-3 py-2 text-neutral-600">{row.date}</td>
                       <td class="px-3 py-2 text-right text-neutral-900">
                         {formatCurrency(row.payment)}
                       </td>

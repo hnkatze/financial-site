@@ -76,7 +76,7 @@ export const calculatorContent = {
     invalidInputs: 'Ingrese valores válidos para ver los resultados.',
     amortizationTitle: 'Tabla de amortización',
     amortizationMonthsSuffix: 'meses',
-    tableMonth: 'Mes',
+    tableDate: 'Fecha',
     tablePayment: 'Cuota',
     tablePrincipal: 'Capital',
     tableInterest: 'Interés',
