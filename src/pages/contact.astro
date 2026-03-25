@@ -3,21 +3,24 @@ import Layout from '../layouts/Layout.astro';
 import Container from '../components/ui/Container.astro';
 import ContactForm from '../components/contact/ContactForm.astro';
 import { generateLocalBusinessJsonLd, generateBreadcrumbJsonLd } from '../lib/seo';
-import siteData from '../data/site.json';
+import { siteData } from '../data/site';
+import { pagesSeo, breadcrumbLabels } from '../data/pages-seo';
+import { contactContent } from '../data/content/contact';
 
 const localBusinessJsonLd = generateLocalBusinessJsonLd(siteData);
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: 'Inicio', url: 'https://www.example.com/' },
-  { name: 'Contacto', url: 'https://www.example.com/contact' },
+  { name: breadcrumbLabels.home, url: `${siteData.url}/` },
+  { name: breadcrumbLabels.contact, url: `${siteData.url}/contact` },
 ]);
 
 const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
+const { hero, form, sidebar } = contactContent;
 ---
 
 <Layout
-  title="Contacto — FinanzaPro | Habla con Nuestros Asesores"
-  description="Contáctanos para recibir asesoría financiera personalizada. Visítanos en Tegucigalpa o comunícate por teléfono, correo o nuestro formulario en línea."
-  url="https://www.example.com/contact"
+  title={pagesSeo.contact.title}
+  description={pagesSeo.contact.description}
+  url={`${siteData.url}/contact`}
   jsonLd={jsonLd}
 >
   {/* Page hero */}
@@ -36,13 +39,13 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
     <Container class="relative z-10 text-center">
       <div class="animate-fade-in-up">
         <span class="mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium text-primary-100 backdrop-blur-sm">
-          Estamos para ayudarte
+          {hero.badge}
         </span>
         <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-heading">
-          Contáctanos
+          {hero.title}
         </h1>
         <p class="mx-auto mt-4 max-w-2xl text-lg text-primary-100/90">
-          Nuestro equipo de asesores está listo para ayudarte a encontrar la solución financiera ideal. Escríbenos o visítanos.
+          {hero.subtitle}
         </p>
       </div>
     </Container>
@@ -56,10 +59,10 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
         <div class="lg:col-span-3">
           <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-soft sm:p-8 lg:p-10">
             <h2 class="text-2xl font-bold text-neutral-900 mb-2">
-              Envíanos un mensaje
+              {form.sectionTitle}
             </h2>
             <p class="mb-8 text-neutral-600">
-              Completa el formulario y nos pondremos en contacto contigo lo antes posible.
+              {form.sectionSubtitle}
             </p>
             <ContactForm />
           </div>
@@ -77,11 +80,11 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-neutral-900">Dirección</h3>
+                <h3 class="font-bold text-neutral-900">{sidebar.address.title}</h3>
                 <p class="mt-1 text-sm text-neutral-600 leading-relaxed">
                   {siteData.address.street}<br />
                   {siteData.address.city}, {siteData.address.state}<br />
-                  Honduras
+                  {sidebar.address.countryLabel}
                 </p>
               </div>
             </div>
@@ -96,12 +99,12 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-neutral-900">Teléfono</h3>
+                <h3 class="font-bold text-neutral-900">{sidebar.phone.title}</h3>
                 <a href={`tel:${siteData.telephone.replace(/\s/g, '')}`} class="mt-1 block text-sm text-primary-600 hover:text-primary-700 transition-colors">
                   {siteData.telephone}
                 </a>
                 <p class="mt-1 text-xs text-neutral-500">
-                  Lunes a Viernes, 8:00 AM - 5:00 PM
+                  {sidebar.phone.hours}
                 </p>
               </div>
             </div>
@@ -116,12 +119,12 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-neutral-900">Correo electrónico</h3>
+                <h3 class="font-bold text-neutral-900">{sidebar.email.title}</h3>
                 <a href={`mailto:${siteData.email}`} class="mt-1 block text-sm text-primary-600 hover:text-primary-700 transition-colors">
                   {siteData.email}
                 </a>
                 <p class="mt-1 text-xs text-neutral-500">
-                  Respondemos en menos de 24 horas
+                  {sidebar.email.responseTime}
                 </p>
               </div>
             </div>
@@ -129,14 +132,14 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
 
           {/* Social links */}
           <div class="animate-fade-in-up rounded-2xl border border-neutral-200 bg-white p-6 shadow-soft">
-            <h3 class="font-bold text-neutral-900 mb-4">Síguenos</h3>
+            <h3 class="font-bold text-neutral-900 mb-4">{sidebar.social.title}</h3>
             <div class="flex gap-3">
               {/* Facebook */}
               <a
                 href={siteData.social[0]}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook de FinanzaPro"
+                aria-label={sidebar.social.ariaLabels.facebook}
                 class="flex size-11 items-center justify-center rounded-xl text-neutral-500 hover:text-primary-600 hover:bg-primary-50 transition-colors"
               >
                 <svg class="size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -149,7 +152,7 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
                 href={siteData.social[1]}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram de FinanzaPro"
+                aria-label={sidebar.social.ariaLabels.instagram}
                 class="flex size-11 items-center justify-center rounded-xl text-neutral-500 hover:text-primary-600 hover:bg-primary-50 transition-colors"
               >
                 <svg class="size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -162,7 +165,7 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
                 href={siteData.social[2]}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn de FinanzaPro"
+                aria-label={sidebar.social.ariaLabels.linkedin}
                 class="flex size-11 items-center justify-center rounded-xl text-neutral-500 hover:text-primary-600 hover:bg-primary-50 transition-colors"
               >
                 <svg class="size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -175,7 +178,7 @@ const jsonLd = [localBusinessJsonLd, breadcrumbJsonLd];
                 href={siteData.social[3]}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Twitter de FinanzaPro"
+                aria-label={sidebar.social.ariaLabels.twitter}
                 class="flex size-11 items-center justify-center rounded-xl text-neutral-500 hover:text-primary-600 hover:bg-primary-50 transition-colors"
               >
                 <svg class="size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

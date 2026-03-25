@@ -6,25 +6,25 @@ import ServiceCard from '../components/services/ServiceCard.astro';
 import ServiceDetail from '../components/services/ServiceDetail.astro';
 import Button from '../components/ui/Button.astro';
 import { generateServiceJsonLd, generateBreadcrumbJsonLd } from '../lib/seo';
-import servicesData from '../data/services.json';
-import siteData from '../data/site.json';
-import type { Service } from '../types/index';
+import { services } from '../data/services';
+import { siteData } from '../data/site';
+import { pagesSeo, breadcrumbLabels } from '../data/pages-seo';
+import { servicesPageContent } from '../data/content/services-page';
 
-const services = servicesData as Service[];
-
-const serviceJsonLd = generateServiceJsonLd(services, siteData);
+const serviceJsonLd = generateServiceJsonLd([...services], siteData);
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: 'Inicio', url: 'https://www.example.com/' },
-  { name: 'Servicios', url: 'https://www.example.com/services' },
+  { name: breadcrumbLabels.home, url: `${siteData.url}/` },
+  { name: breadcrumbLabels.services, url: `${siteData.url}/services` },
 ]);
 
 const jsonLd = [serviceJsonLd, breadcrumbJsonLd];
+const { hero, overview, detail, cta } = servicesPageContent;
 ---
 
 <Layout
-  title="Servicios — FinanzaPro | Préstamos, Inversiones, Seguros y Más"
-  description="Descubre nuestros servicios financieros: préstamos personales, créditos empresariales, inversiones, seguros y asesoría financiera personalizada en Honduras."
-  url="https://www.example.com/services"
+  title={pagesSeo.services.title}
+  description={pagesSeo.services.description}
+  url={`${siteData.url}/services`}
   jsonLd={jsonLd}
 >
   {/* Page hero */}
@@ -43,13 +43,13 @@ const jsonLd = [serviceJsonLd, breadcrumbJsonLd];
     <Container class="relative z-10 text-center">
       <div class="animate-fade-in-up">
         <span class="mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium text-primary-100 backdrop-blur-sm">
-          Soluciones a tu medida
+          {hero.badge}
         </span>
         <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-heading">
-          Nuestros Servicios
+          {hero.title}
         </h1>
         <p class="mx-auto mt-4 max-w-2xl text-lg text-primary-100/90">
-          Soluciones financieras integrales diseñadas para acompañarte en cada etapa de tu vida. Desde préstamos personales hasta asesoría patrimonial.
+          {hero.subtitle}
         </p>
       </div>
     </Container>
@@ -59,9 +59,9 @@ const jsonLd = [serviceJsonLd, breadcrumbJsonLd];
   <section class="py-20 lg:py-28 bg-neutral-50">
     <Container>
       <SectionHeading
-        title="¿Qué ofrecemos?"
-        subtitle="Explora nuestro catálogo completo de servicios financieros y encuentra la solución perfecta para tus necesidades."
-        badge="Catálogo"
+        title={overview.title}
+        subtitle={overview.subtitle}
+        badge={overview.badge}
       />
 
       <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
@@ -78,9 +78,9 @@ const jsonLd = [serviceJsonLd, breadcrumbJsonLd];
   <section class="py-20 lg:py-28 bg-white">
     <Container>
       <SectionHeading
-        title="Detalle de Servicios"
-        subtitle="Conoce a fondo cada uno de nuestros servicios y sus beneficios."
-        badge="En Profundidad"
+        title={detail.title}
+        subtitle={detail.subtitle}
+        badge={detail.badge}
       />
 
       <div class="space-y-8">
@@ -92,10 +92,10 @@ const jsonLd = [serviceJsonLd, breadcrumbJsonLd];
       {/* CTA */}
       <div class="mt-16 text-center animate-fade-in-up">
         <p class="mb-6 text-lg text-neutral-600">
-          ¿No estás seguro de qué servicio es el adecuado para ti?
+          {cta.text}
         </p>
-        <Button href="/contact" size="lg">
-          Habla con un Asesor
+        <Button href={cta.buttonHref} size="lg">
+          {cta.buttonText}
         </Button>
       </div>
     </Container>
