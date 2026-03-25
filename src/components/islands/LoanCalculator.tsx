@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'preact/hooks';
 import { calculateLoan, formatCurrency } from '../../lib/calculator';
+import { calculatorContent } from '../../data/content/calculator';
 
 const TERM_OPTIONS = [6, 12, 18, 24, 36, 48, 60, 72, 84, 96, 120];
+const L = calculatorContent.labels;
 
 export default function LoanCalculator() {
   const [principal, setPrincipal] = useState(100000);
@@ -31,7 +33,7 @@ export default function LoanCalculator() {
         {/* ── Input section ── */}
         <div class="p-6 sm:p-8 lg:p-10">
           <h3 class="text-xl font-bold text-neutral-900 mb-6">
-            Datos del Préstamo
+            {L.inputSection}
           </h3>
 
           {/* Monto del préstamo */}
@@ -40,7 +42,7 @@ export default function LoanCalculator() {
               htmlFor="calc-principal"
               class="mb-2 block text-sm font-medium text-neutral-700"
             >
-              Monto del préstamo
+              {L.principalLabel}
             </label>
             <div class="flex items-center gap-3">
               <input
@@ -64,16 +66,16 @@ export default function LoanCalculator() {
               step={1000}
               value={principal}
               onInput={(e) => setPrincipal(Number((e.target as HTMLInputElement).value))}
-              aria-label="Ajustar monto del préstamo"
+              aria-label={L.principalAriaLabel}
               class="mt-3 w-full cursor-pointer accent-[oklch(0.53_0.15_175)]"
             />
             <div class="mt-1 flex justify-between text-xs text-neutral-500">
-              <span>L 1,000</span>
+              <span>{L.principalMin}</span>
               <span>{formatCurrency(principal)}</span>
-              <span>L 1,000,000</span>
+              <span>{L.principalMax}</span>
             </div>
             {principal <= 0 && (
-              <p class="mt-1 text-sm text-red-500" role="alert">El monto debe ser mayor a cero.</p>
+              <p class="mt-1 text-sm text-red-500" role="alert">{L.principalError}</p>
             )}
           </div>
 
@@ -83,7 +85,7 @@ export default function LoanCalculator() {
               htmlFor="calc-rate"
               class="mb-2 block text-sm font-medium text-neutral-700"
             >
-              Tasa de interés anual (%)
+              {L.rateLabel}
             </label>
             <input
               id="calc-rate"
@@ -105,7 +107,7 @@ export default function LoanCalculator() {
               step={0.5}
               value={rate}
               onInput={(e) => setRate(Number((e.target as HTMLInputElement).value))}
-              aria-label="Ajustar tasa de interés"
+              aria-label={L.rateAriaLabel}
               class="mt-3 w-full cursor-pointer accent-[oklch(0.53_0.15_175)]"
             />
             <div class="mt-1 flex justify-between text-xs text-neutral-500">
@@ -115,7 +117,7 @@ export default function LoanCalculator() {
             </div>
             {highRateWarning && (
               <p class="mt-1 text-sm text-amber-600" role="alert">
-                Atención: tasa superior al 50%. Verifique que sea correcta.
+                {L.rateWarning}
               </p>
             )}
           </div>
@@ -126,7 +128,7 @@ export default function LoanCalculator() {
               htmlFor="calc-term"
               class="mb-2 block text-sm font-medium text-neutral-700"
             >
-              Plazo en meses
+              {L.termLabel}
             </label>
             <select
               id="calc-term"
@@ -136,7 +138,7 @@ export default function LoanCalculator() {
             >
               {TERM_OPTIONS.map((m) => (
                 <option key={m} value={m}>
-                  {m} meses ({(m / 12).toFixed(m % 12 === 0 ? 0 : 1)} años)
+                  {m} {L.termOptionSuffix} ({(m / 12).toFixed(m % 12 === 0 ? 0 : 1)} {L.termOptionYearsSuffix})
                 </option>
               ))}
             </select>
@@ -145,14 +147,14 @@ export default function LoanCalculator() {
 
         {/* ── Results section ── */}
         <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-800 p-6 sm:p-8 lg:p-10 text-white">
-          <h3 class="text-xl font-bold mb-6 text-primary-100">Resultados</h3>
+          <h3 class="text-xl font-bold mb-6 text-primary-100">{L.resultsSection}</h3>
 
           <div aria-live="polite" aria-atomic="true">
             {isValid ? (
               <div>
                 {/* Monthly payment — prominently displayed */}
                 <div class="mb-8">
-                  <p class="text-sm font-medium text-primary-200/80 mb-1">Cuota mensual</p>
+                  <p class="text-sm font-medium text-primary-200/80 mb-1">{L.monthlyPayment}</p>
                   <p class="text-4xl sm:text-5xl font-extrabold tracking-tight">
                     {formatCurrency(result.monthlyPayment)}
                   </p>
@@ -161,18 +163,18 @@ export default function LoanCalculator() {
                 {/* Secondary metrics */}
                 <div class="grid grid-cols-2 gap-4 mb-8">
                   <div>
-                    <p class="text-sm font-medium text-primary-200/80 mb-1">Total a pagar</p>
+                    <p class="text-sm font-medium text-primary-200/80 mb-1">{L.totalPayment}</p>
                     <p class="text-xl font-bold">{formatCurrency(result.totalPayment)}</p>
                   </div>
                   <div>
-                    <p class="text-sm font-medium text-primary-200/80 mb-1">Total intereses</p>
+                    <p class="text-sm font-medium text-primary-200/80 mb-1">{L.totalInterest}</p>
                     <p class="text-xl font-bold">{formatCurrency(result.totalInterest)}</p>
                   </div>
                 </div>
 
                 {/* Principal vs interest visual bar */}
                 <div class="mb-2">
-                  <p class="text-sm font-medium text-primary-200/80 mb-2">Capital vs Intereses</p>
+                  <p class="text-sm font-medium text-primary-200/80 mb-2">{L.principalVsInterest}</p>
                   <div class="h-4 w-full overflow-hidden rounded-full bg-white/20">
                     <div
                       class="h-full rounded-full bg-white transition-all duration-300"
@@ -180,14 +182,14 @@ export default function LoanCalculator() {
                     />
                   </div>
                   <div class="mt-1 flex justify-between text-xs text-primary-200/80">
-                    <span>Capital: {(100 - interestRatio).toFixed(1)}%</span>
-                    <span>Intereses: {interestRatio.toFixed(1)}%</span>
+                    <span>{L.capitalLabel}: {(100 - interestRatio).toFixed(1)}%</span>
+                    <span>{L.interestLabel}: {interestRatio.toFixed(1)}%</span>
                   </div>
                 </div>
               </div>
             ) : (
               <p class="text-primary-200/80">
-                Ingrese valores válidos para ver los resultados.
+                {L.invalidInputs}
               </p>
             )}
           </div>
@@ -205,7 +207,7 @@ export default function LoanCalculator() {
             class="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-neutral-700 hover:bg-neutral-50 transition-colors sm:px-8 lg:px-10 min-h-[44px]"
           >
             <span>
-              Tabla de amortización ({result.schedule.length} meses)
+              {L.amortizationTitle} ({result.schedule.length} {L.amortizationMonthsSuffix})
             </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -225,11 +227,11 @@ export default function LoanCalculator() {
               <table class="w-full min-w-[500px] text-sm">
                 <thead class="sticky top-0 bg-neutral-100">
                   <tr>
-                    <th class="px-3 py-2 text-left font-semibold text-neutral-700">Mes</th>
-                    <th class="px-3 py-2 text-right font-semibold text-neutral-700">Cuota</th>
-                    <th class="px-3 py-2 text-right font-semibold text-neutral-700">Capital</th>
-                    <th class="px-3 py-2 text-right font-semibold text-neutral-700">Interés</th>
-                    <th class="px-3 py-2 text-right font-semibold text-neutral-700">Saldo</th>
+                    <th class="px-3 py-2 text-left font-semibold text-neutral-700">{L.tableMonth}</th>
+                    <th class="px-3 py-2 text-right font-semibold text-neutral-700">{L.tablePayment}</th>
+                    <th class="px-3 py-2 text-right font-semibold text-neutral-700">{L.tablePrincipal}</th>
+                    <th class="px-3 py-2 text-right font-semibold text-neutral-700">{L.tableInterest}</th>
+                    <th class="px-3 py-2 text-right font-semibold text-neutral-700">{L.tableBalance}</th>
                   </tr>
                 </thead>
                 <tbody>

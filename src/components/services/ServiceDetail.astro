@@ -1,6 +1,7 @@
 ---
 import Container from '../ui/Container.astro';
 import type { Service } from '../../types/index';
+import { servicesPageContent } from '../../data/content/services-page';
 
 interface Props {
   service: Service;
@@ -38,7 +39,7 @@ const iconSvg = iconMap[service.icon] ?? iconMap['banknotes'];
       {/* Features list */}
       <div class="lg:w-2/3">
         <h4 class="mb-4 text-sm font-semibold uppercase tracking-wider text-primary-600">
-          Características incluidas
+          {servicesPageContent.detail.featuresHeading}
         </h4>
         <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2" role="list">
           {service.features.map((feature) => (
