@@ -1,48 +1,18 @@
 ---
 import Container from '../ui/Container.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
-import type { TimelineEvent } from '../../types/index';
+import { aboutContent } from '../../data/content/about';
 
-const milestones: TimelineEvent[] = [
-  {
-    year: '2008',
-    title: 'Fundación de FinanzaPro',
-    description: 'Iniciamos operaciones en Tegucigalpa con una visión clara: democratizar el acceso a servicios financieros de calidad en Honduras.',
-  },
-  {
-    year: '2012',
-    title: 'Expansión Regional',
-    description: 'Abrimos nuestras primeras sucursales en San Pedro Sula y La Ceiba, llevando nuestros servicios a más hondureños.',
-  },
-  {
-    year: '2016',
-    title: 'Transformación Digital',
-    description: 'Lanzamos nuestra plataforma en línea, permitiendo a nuestros clientes gestionar sus finanzas desde cualquier dispositivo.',
-  },
-  {
-    year: '2019',
-    title: 'Certificación Internacional',
-    description: 'Obtuvimos certificaciones de calidad ISO 9001 y reconocimiento como una de las empresas financieras más innovadoras de Centroamérica.',
-  },
-  {
-    year: '2022',
-    title: '15,000 Clientes Activos',
-    description: 'Alcanzamos un hito histórico con más de 15,000 clientes activos y L. 2,500 millones en préstamos otorgados.',
-  },
-  {
-    year: '2025',
-    title: 'Innovación Continua',
-    description: 'Implementamos tecnología fintech de última generación y ampliamos nuestra oferta con nuevos productos de inversión y seguros.',
-  },
-];
+const { timeline } = aboutContent;
+const milestones = timeline.milestones;
 ---
 
 <section class="py-20 lg:py-28 bg-white">
   <Container size="md">
     <SectionHeading
-      title="Nuestra Historia"
-      subtitle="Más de 15 años construyendo confianza y resultados para nuestros clientes."
-      badge="Trayectoria"
+      title={timeline.title}
+      subtitle={timeline.subtitle}
+      badge={timeline.badge}
     />
 
     <div class="relative">

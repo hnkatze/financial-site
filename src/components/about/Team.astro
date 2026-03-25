@@ -2,18 +2,18 @@
 import Container from '../ui/Container.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 import Card from '../ui/Card.astro';
-import type { TeamMember } from '../../types/index';
-import teamData from '../../data/team.json';
+import { team } from '../../data/team';
+import { aboutContent } from '../../data/content/about';
 
-const team = teamData as TeamMember[];
+const { team: teamContent } = aboutContent;
 ---
 
 <section class="py-20 lg:py-28 bg-neutral-50">
   <Container>
     <SectionHeading
-      title="Nuestro Equipo"
-      subtitle="Profesionales comprometidos con tu éxito financiero, con décadas de experiencia combinada en el sector."
-      badge="Equipo Directivo"
+      title={teamContent.title}
+      subtitle={teamContent.subtitle}
+      badge={teamContent.badge}
     />
 
     <ul class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4" role="list">

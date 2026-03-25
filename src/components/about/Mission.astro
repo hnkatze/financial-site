@@ -1,6 +1,9 @@
 ---
 import Container from '../ui/Container.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
+import { aboutContent } from '../../data/content/about';
+
+const { mission } = aboutContent;
 ---
 
 <section class="py-20 lg:py-28 bg-neutral-50">
@@ -9,18 +12,15 @@ import SectionHeading from '../ui/SectionHeading.astro';
       <!-- Text content -->
       <div class="animate-fade-in-up">
         <SectionHeading
-          title="Nuestra Misión"
-          subtitle="Democratizar el acceso a servicios financieros de calidad en Honduras, brindando soluciones accesibles, transparentes y personalizadas que impulsen el bienestar económico de familias y empresas."
-          badge="Misión"
+          title={mission.title}
+          subtitle={mission.subtitle}
+          badge={mission.badge}
           align="left"
         />
         <div class="space-y-4 text-neutral-600 leading-relaxed">
-          <p>
-            Desde nuestra fundación, hemos creído que cada hondureño merece acceso a herramientas financieras que le permitan construir un futuro más sólido. No somos solo una empresa de servicios financieros — somos un aliado comprometido con tu crecimiento.
-          </p>
-          <p>
-            Trabajamos cada día para simplificar lo complejo, para que puedas tomar decisiones financieras con confianza y claridad.
-          </p>
+          {mission.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
         </div>
       </div>
 
@@ -54,9 +54,9 @@ import SectionHeading from '../ui/SectionHeading.astro';
             </svg>
           </div>
           <div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-2">Nuestra Visión</h3>
+            <h3 class="text-xl font-bold text-neutral-900 mb-2">{mission.visionTitle}</h3>
             <p class="text-neutral-600 leading-relaxed">
-              Ser la empresa líder en soluciones financieras innovadoras en Centroamérica, reconocida por la excelencia en el servicio, la tecnología de vanguardia y el impacto positivo en las comunidades que servimos. Aspiramos a que cada hondureño tenga las herramientas para alcanzar su máximo potencial económico.
+              {mission.visionText}
             </p>
           </div>
         </div>
