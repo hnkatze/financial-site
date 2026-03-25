@@ -74,6 +74,7 @@ export const calculatorContent = {
     capitalLabel: 'Capital',
     interestLabel: 'Intereses',
     invalidInputs: 'Ingrese valores válidos para ver los resultados.',
+    downloadExcel: 'Descargar Excel',
     amortizationTitle: 'Tabla de amortización',
     amortizationMonthsSuffix: 'meses',
     tableDate: 'Fecha',

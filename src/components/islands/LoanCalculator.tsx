@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'preact/hooks';
+import * as XLSX from 'xlsx';
 import { calculateLoan, formatCurrency } from '../../lib/calculator';
 import { calculatorContent } from '../../data/content/calculator';
 
@@ -26,6 +27,26 @@ export default function LoanCalculator() {
 
   // Ratio of principal vs interest for the visual bar
   const interestRatio = result.totalPayment > 0 ? (result.totalInterest / result.totalPayment) * 100 : 0;
+
+  const downloadExcel = () => {
+    const summaryData = [
+      [L.startDateLabel, result.startDate, '', L.endDateLabel, result.endDate],
+      [L.monthlyPayment, result.monthlyPayment, '', L.totalPayment, result.totalPayment],
+      [L.totalInterest, result.totalInterest],
+      [],
+      [L.tableDate, L.tablePayment, L.tablePrincipal, L.tableInterest, L.tableBalance],
+      ...result.schedule.map((r) => [r.date, r.payment, r.principal, r.interest, r.balance]),
+    ];
+
+    const ws = XLSX.utils.aoa_to_sheet(summaryData);
+
+    // Column widths
+    ws['!cols'] = [{ wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 14 }];
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Amortización');
+    XLSX.writeFile(wb, `amortizacion-L${principal}-${termMonths}meses.xlsx`);
+  };
 
   return (
     <div class="rounded-2xl border border-neutral-200 bg-white shadow-xl overflow-hidden">
@@ -211,28 +232,41 @@ export default function LoanCalculator() {
       {/* ── Amortization table ── */}
       {isValid && result.schedule.length > 0 && (
         <div class="border-t border-neutral-200">
-          <button
-            type="button"
-            onClick={() => setShowTable(!showTable)}
-            aria-expanded={showTable}
-            aria-controls="amortization-table"
-            class="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-neutral-700 hover:bg-neutral-50 transition-colors sm:px-8 lg:px-10 min-h-[44px]"
-          >
-            <span>
-              {L.amortizationTitle} ({result.schedule.length} {L.amortizationMonthsSuffix})
-            </span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class={`size-5 transition-transform duration-200 ${showTable ? 'rotate-180' : ''}`}
-              aria-hidden="true"
+          <div class="flex items-center justify-between px-6 sm:px-8 lg:px-10">
+            <button
+              type="button"
+              onClick={() => setShowTable(!showTable)}
+              aria-expanded={showTable}
+              aria-controls="amortization-table"
+              class="flex flex-1 items-center justify-between py-4 text-left font-medium text-neutral-700 hover:text-neutral-900 transition-colors min-h-[44px]"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-            </svg>
-          </button>
+              <span>
+                {L.amortizationTitle} ({result.schedule.length} {L.amortizationMonthsSuffix})
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class={`size-5 transition-transform duration-200 ${showTable ? 'rotate-180' : ''}`}
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={downloadExcel}
+              class="ml-4 flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors min-h-[44px]"
+              aria-label={L.downloadExcel}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              </svg>
+              <span class="hidden sm:inline">{L.downloadExcel}</span>
+            </button>
+          </div>
 
           {showTable && (
             <div id="amortization-table" class="max-h-[400px] overflow-auto px-6 pb-6 sm:px-8 lg:px-10">
