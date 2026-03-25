@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import ServiceCard from '../components/services/ServiceCard.astro';
+import ServiceDetail from '../components/services/ServiceDetail.astro';
+import Button from '../components/ui/Button.astro';
+import { generateServiceJsonLd, generateBreadcrumbJsonLd } from '../lib/seo';
+import servicesData from '../data/services.json';
+import siteData from '../data/site.json';
+import type { Service } from '../types/index';
+
+const services = servicesData as Service[];
+
+const serviceJsonLd = generateServiceJsonLd(services, siteData);
+const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+  { name: 'Inicio', url: 'https://www.example.com/' },
+  { name: 'Servicios', url: 'https://www.example.com/services' },
+]);
+
+const jsonLd = [serviceJsonLd, breadcrumbJsonLd];
+---
+
+<Layout
+  title="Servicios — FinanzaPro | Préstamos, Inversiones, Seguros y Más"
+  description="Descubre nuestros servicios financieros: préstamos personales, créditos empresariales, inversiones, seguros y asesoría financiera personalizada en Honduras."
+  url="https://www.example.com/services"
+  jsonLd={jsonLd}
+>
+  {/* Page hero */}
+  <section class="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-900 py-20 sm:py-24 lg:py-32">
+    <!-- Decorative elements -->
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+      <svg class="absolute -top-16 -right-16 h-72 w-72 opacity-10 animate-float" viewBox="0 0 288 288" fill="none">
+        <circle cx="144" cy="144" r="144" fill="white" />
+      </svg>
+      <svg class="absolute -bottom-12 -left-12 h-56 w-56 opacity-10" viewBox="0 0 224 224" fill="none">
+        <circle cx="112" cy="112" r="112" fill="white" />
+      </svg>
+    </div>
+
+    <Container class="relative z-10 text-center">
+      <div class="animate-fade-in-up">
+        <span class="mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium text-primary-100 backdrop-blur-sm">
+          Soluciones a tu medida
+        </span>
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-heading">
+          Nuestros Servicios
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-primary-100/90">
+          Soluciones financieras integrales diseñadas para acompañarte en cada etapa de tu vida. Desde préstamos personales hasta asesoría patrimonial.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  {/* Services overview grid */}
+  <section class="py-20 lg:py-28 bg-neutral-50">
+    <Container>
+      <SectionHeading
+        title="¿Qué ofrecemos?"
+        subtitle="Explora nuestro catálogo completo de servicios financieros y encuentra la solución perfecta para tus necesidades."
+        badge="Catálogo"
+      />
+
+      <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+        {services.map((service) => (
+          <li class="animate-fade-in-up">
+            <ServiceCard service={service} />
+          </li>
+        ))}
+      </ul>
+    </Container>
+  </section>
+
+  {/* Detailed service sections */}
+  <section class="py-20 lg:py-28 bg-white">
+    <Container>
+      <SectionHeading
+        title="Detalle de Servicios"
+        subtitle="Conoce a fondo cada uno de nuestros servicios y sus beneficios."
+        badge="En Profundidad"
+      />
+
+      <div class="space-y-8">
+        {services.map((service) => (
+          <ServiceDetail service={service} />
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div class="mt-16 text-center animate-fade-in-up">
+        <p class="mb-6 text-lg text-neutral-600">
+          ¿No estás seguro de qué servicio es el adecuado para ti?
+        </p>
+        <Button href="/contact" size="lg">
+          Habla con un Asesor
+        </Button>
+      </div>
+    </Container>
+  </section>
+</Layout>
