@@ -1,0 +1,42 @@
+[
+  {
+    "id": "director-general",
+    "name": "José Ricardo Andrade",
+    "role": "Director General",
+    "bio": "Con más de 20 años de experiencia en el sector financiero centroamericano, José Ricardo ha liderado la transformación digital de FinanzaPro desde sus inicios.",
+    "avatar": "/images/team/placeholder-1.svg",
+    "social": {
+      "linkedin": "https://linkedin.com/in/example"
+    }
+  },
+  {
+    "id": "directora-financiera",
+    "name": "Laura Beatriz Castillo",
+    "role": "Directora Financiera",
+    "bio": "Experta en gestión de riesgos y planificación estratégica. Laura ha sido fundamental en el diseño de los productos financieros innovadores de la empresa.",
+    "avatar": "/images/team/placeholder-2.svg",
+    "social": {
+      "linkedin": "https://linkedin.com/in/example"
+    }
+  },
+  {
+    "id": "director-tecnologia",
+    "name": "Eduardo Martín Flores",
+    "role": "Director de Tecnología",
+    "bio": "Pionero en la adopción de tecnología fintech en Honduras. Eduardo lidera la plataforma digital que permite a nuestros clientes gestionar sus finanzas en línea.",
+    "avatar": "/images/team/placeholder-3.svg",
+    "social": {
+      "linkedin": "https://linkedin.com/in/example"
+    }
+  },
+  {
+    "id": "directora-operaciones",
+    "name": "Carmen Sofía Aguilar",
+    "role": "Directora de Operaciones",
+    "bio": "Especialista en optimización de procesos y experiencia del cliente. Carmen asegura que cada interacción con FinanzaPro sea eficiente y satisfactoria.",
+    "avatar": "/images/team/placeholder-4.svg",
+    "social": {
+      "linkedin": "https://linkedin.com/in/example"
+    }
+  }
+]
