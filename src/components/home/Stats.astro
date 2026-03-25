@@ -1,0 +1,51 @@
+---
+import Container from '../ui/Container.astro';
+
+const stats = [
+  { value: 15000, suffix: '+', label: 'Clientes Atendidos' },
+  { value: 15, suffix: '+', label: 'Anos de Experiencia' },
+  { value: 2500, suffix: 'M', prefix: 'L.', label: 'Prestamos Otorgados' },
+  { value: 8, label: 'Sucursales en Honduras' },
+];
+---
+
+<section class="relative overflow-hidden bg-gradient-to-br from-secondary-800 via-secondary-900 to-secondary-950 py-20 lg:py-28">
+  <!-- Decorative elements -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <svg class="absolute -top-20 -right-20 h-80 w-80 opacity-5" viewBox="0 0 320 320" fill="none">
+      <circle cx="160" cy="160" r="160" fill="white" />
+    </svg>
+  </div>
+
+  <Container class="relative z-10">
+    <div class="mb-12 text-center lg:mb-16">
+      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl font-heading">
+        Numeros que respaldan nuestra trayectoria
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-secondary-200/80">
+        Mas de una decada construyendo confianza y resultados para nuestros clientes.
+      </p>
+    </div>
+
+    <dl class="grid grid-cols-2 gap-8 lg:grid-cols-4">
+      {stats.map((stat) => (
+        <div class="animate-fade-in-up text-center">
+          <dt class="order-2 mt-2 text-sm font-medium text-secondary-300 sm:text-base">
+            {stat.label}
+          </dt>
+          <dd class="order-1 text-4xl font-extrabold text-white sm:text-5xl lg:text-6xl font-heading">
+            {stat.prefix && <span class="text-primary-400">{stat.prefix}</span>}
+            <span
+              class="tabular-nums"
+              style={`counter-reset: num ${stat.value}; animation: count-up 2s ease-out forwards; animation-timeline: view(); animation-range: entry 0% entry 50%;`}
+            >
+              {stat.value.toLocaleString('es-HN')}
+            </span>
+            {stat.suffix && <span class="text-primary-400">{stat.suffix}</span>}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </Container>
+</section>

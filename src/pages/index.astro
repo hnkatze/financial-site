@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/home/Hero.astro';
+import Features from '../components/home/Features.astro';
+import ServicesPreview from '../components/home/ServicesPreview.astro';
+import Stats from '../components/home/Stats.astro';
+import Testimonials from '../components/home/Testimonials.astro';
+import Partners from '../components/home/Partners.astro';
+import CTA from '../components/home/CTA.astro';
+import { generateOrganizationJsonLd } from '../lib/seo';
+import siteData from '../data/site.json';
+
+const jsonLd = generateOrganizationJsonLd(siteData);
+---
+
+<Layout
+  title="FinanzaPro — Soluciones Financieras Integrales"
+  description="Soluciones financieras integrales para personas y empresas en Honduras. Prestamos, inversiones, seguros y asesoria financiera personalizada."
+  url="https://www.example.com/"
+  jsonLd={jsonLd}
+>
+  <Hero />
+  <Features />
+  <ServicesPreview />
+  <Stats />
+  <Testimonials />
+  <Partners />
+  <CTA />
+</Layout>

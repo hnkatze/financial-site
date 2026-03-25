@@ -1,0 +1,45 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+---
+
+<section class="relative overflow-hidden animate-hue-shift py-24 sm:py-32 lg:py-40">
+  <!-- Decorative background shapes -->
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <svg class="absolute -top-24 -right-24 h-[500px] w-[500px] opacity-10 animate-float" viewBox="0 0 500 500" fill="none">
+      <circle cx="250" cy="250" r="250" fill="currentColor" class="text-white" />
+    </svg>
+    <svg class="absolute -bottom-16 -left-16 h-[400px] w-[400px] opacity-10" viewBox="0 0 400 400" fill="none">
+      <circle cx="200" cy="200" r="200" fill="currentColor" class="text-primary-300" />
+    </svg>
+    <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[700px] w-[700px] opacity-[0.04]" viewBox="0 0 700 700" fill="none">
+      <rect x="100" y="100" width="500" height="500" rx="80" stroke="currentColor" stroke-width="2" class="text-white" />
+      <rect x="200" y="200" width="300" height="300" rx="50" stroke="currentColor" stroke-width="1.5" class="text-white" />
+    </svg>
+    <!-- Dotted grid pattern -->
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+  </div>
+
+  <Container class="relative z-10">
+    <div class="animate-fade-in-up text-center">
+      <span class="mb-6 inline-block rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium text-primary-100 backdrop-blur-sm">
+        Soluciones financieras desde 2008
+      </span>
+      <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl font-heading leading-tight">
+        Tu futuro financiero<br class="hidden sm:block" />
+        <span class="animate-text-shimmer">comienza aqui</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-primary-100/90 sm:text-xl">
+        Soluciones financieras integrales disenadas para impulsar tus metas personales y empresariales con confianza, transparencia y el respaldo de mas de 15 anos de experiencia.
+      </p>
+      <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <Button href="/services" size="lg" class="bg-white! text-primary-700! hover:bg-neutral-100! shadow-lg animate-btn-shimmer animate-pulse-glow">
+          Nuestros Servicios
+        </Button>
+        <Button href="/calculator" variant="outline" size="lg" class="border-white/80! text-white! hover:bg-white/10!">
+          Calculadora de Prestamos
+        </Button>
+      </div>
+    </div>
+  </Container>
+</section>
