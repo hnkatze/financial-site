@@ -1,0 +1,37 @@
+# openspec/config.yaml
+schema: spec-driven
+
+context: |
+  Tech stack: Astro 6 + Tailwind CSS v4 (via Vite plugin)
+  Architecture: Astro pages/layouts/components pattern, static-first
+  TypeScript: strict mode (extends astro/tsconfigs/strict)
+  Styling: Tailwind v4 CSS-first config, global.css
+  Node: >=22.12.0, npm package manager
+  State: Early project — minimal pages, single layout
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+    - Identify affected pages, layouts, and components
+  specs:
+    - Use Given/When/Then format for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include component hierarchy diagrams
+    - Document island architecture decisions (client directives)
+    - Note which components need hydration vs static
+  tasks:
+    - Group tasks by phase (infrastructure, implementation, testing)
+    - Use hierarchical numbering (1.1, 1.2, etc.)
+    - Keep tasks small enough to complete in one session
+  apply:
+    - Follow Astro file-based routing conventions
+    - Use Tailwind utilities for all styling (CSS only for @keyframes)
+    - Prefer static/server rendering; hydrate only when needed
+    - Load astro-docs MCP for Astro-specific patterns
+  verify:
+    - Compare implementation against every spec scenario
+    - Validate responsive design at 320px, 768px, 1024px, 1440px
+    - Check accessibility (semantic HTML, alt text, keyboard nav)
+  archive:
+    - Warn before merging destructive deltas (large removals)
